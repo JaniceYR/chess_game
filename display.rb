@@ -14,14 +14,25 @@ class Display
   def render
     # while not Ctrl + C do render board
     while true
+
       space = @board.board
+      selected = @cursor.selected_pos
+
+      if selected.length == 2
+        
+        @board.move_piece(:red, selected[0], selected[1])
+        @cursor.selection_clear
+      end
+
       space.each_with_index do |row, idx|
         row.each_with_index do |el, i|
 
           el_to_print = space[idx][i]
 
           if @cursor.cursor_pos == [idx, i]
-            print "#{el_to_print.to_s} ".colorize(:red)
+            print "#{el_to_print.to_s} ".colorize(:color => :black, :background => :light_yellow )
+          elsif selected.include?([idx, i])
+             print "#{el_to_print.to_s} ".colorize(:green)
           else
             print "#{el_to_print.to_s} ".colorize(el_to_print.color)
           end

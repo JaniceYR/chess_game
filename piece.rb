@@ -5,9 +5,9 @@ class Piece
   attr_reader :name
   attr_accessor :color
 
-  def initialize(name = nil)
+  def initialize(color = :black, name = nil)
     @name = name
-    @color = :black
+    @color = color
   end
 
   def to_s
@@ -29,6 +29,11 @@ class Piece
   end
 
   def valid_moves
+
+  end
+
+  def moves(pos)
+    []
   end
 
   private

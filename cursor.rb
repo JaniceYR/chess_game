@@ -33,16 +33,21 @@ MOVES = {
 
 class Cursor
 
-  attr_reader :cursor_pos, :board
+  attr_reader :cursor_pos, :board, :selected_pos
 
   def initialize(cursor_pos, board)
     @cursor_pos = cursor_pos
     @board = board
+    @selected_pos = []
   end
 
   def get_input
     key = KEYMAP[read_char]
     handle_key(key)
+  end
+
+  def selection_clear
+    @selected_pos = []
   end
 
   private
@@ -97,6 +102,7 @@ class Cursor
   end
 
   def toggele_selected(pos)
-    @board[pos].color = :green
+    @selected_pos << pos
   end
+
 end
