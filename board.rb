@@ -2,6 +2,7 @@ require_relative 'piece'
 require_relative 'null_piece'
 require_relative 'slide_pieces'
 require_relative 'step_pieces'
+require_relative 'paws'
 require 'byebug'
 
 class Board
@@ -119,9 +120,9 @@ class Board
     @board[0][5] = Bishop.new(:red, W_INITIAL_LINE[5] )
     @board[0][6] = Knight.new(:red, W_INITIAL_LINE[6] )
     @board[0][7] = Rook.new(:red, W_INITIAL_LINE[7] )
-    0.upto(7) {|i| @board[1][i] = Piece.new(:red, "\u2659") }
+    0.upto(7) {|i| @board[1][i] = Paw.new(:red, "\u2659") }
     2.upto(5) {|i| 0.upto(7) {|idx| @board[i][idx] = NullPiece.instance} }
-    0.upto(7) {|i| @board[6][i] = Piece.new(:blue, "\u265F") }
+    0.upto(7) {|i| @board[6][i] = Paw.new(:blue, "\u265F") }
     @board[7][0] = Rook.new(:blue, B_INITIAL_LINE[0] )
     @board[7][1] = Knight.new(:blue, B_INITIAL_LINE[1] )
     @board[7][2] = Bishop.new(:blue, B_INITIAL_LINE[2] )
