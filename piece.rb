@@ -1,13 +1,18 @@
 require 'byebug'
+require 'colorize'
+
 class Piece
   attr_reader :name
+  attr_accessor :color
+
   def initialize(name = nil)
     @name = name
+    @color = :black
   end
 
   def to_s
     if name
-      "#{@name}"
+      @name
     else
       "_"
     end
@@ -33,38 +38,8 @@ end
 
 module Slidable
   def moves(pos)
-    # moving_dirs = self.class::MOVE
-    # self.super.moves(moving_dirs)
-    # self.class::MOVE.map do |p_pos|
-    #   (0..1).each do |i|
-    #     p_pos[i] + pos[i]
-    #   end
-    # end
-  end
-
-  private
-
-  def move_dirs
-  end
-
-  def horizontial_dirs
-  end
-
-  def diagonal_dirs
-  end
-
-  def grow_unblocked_moves_in_dir(dx, dy)
-  end
-
-end
-
-
-module Stepable
-  def moves(pos)
-    # moving_dirs = self.class::MOVE
-    # self.super.moves(moving_dirs)
     mvs = []
-    self.class::MOVE.map do |p_pos|
+    possible_moves.each do |p_pos|
       mvs << [p_pos[0] + pos[0], p_pos[1] + pos[1]]
     end
     mvs
@@ -73,6 +48,46 @@ module Stepable
   private
 
   def move_dirs
+  end
 
+  def horizontial_dirs
+    mvs = []
+    (1..7).each do |i|
+      mvs << [0, i]
+      mvs << [i, 0]
+      mvs << [0, -i]
+      mvs << [-i, 0]
+    end
+    mvs
+  end
+
+  def diagonal_dirs
+    mvs = []
+    (1..7).each do |i|
+      mvs << [i, i]
+      mvs << [i, -i]
+      mvs << [-i, i]
+      mvs << [-i, -i]
+    end
+    mvs
+  end
+
+  def grow_unblocked_moves_in_dir(dx, dy)
+  end
+
+end
+
+module Stepable
+  def moves(pos)
+    mvs = []
+    possible_moves.each do |p_pos|
+      mvs << [p_pos[0] + pos[0], p_pos[1] + pos[1]]
+    end
+    mvs
+  end
+
+  private
+
+  def move_dirs
   end
 end

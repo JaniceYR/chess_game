@@ -1,17 +1,19 @@
 require_relative 'piece'
+require_relative 'null_piece'
+
 require 'byebug'
 
 class Board
-  INITIAL_LINE = [:r, :n, :b, :k, :q, :b, :n, :r]
+  W_INITIAL_LINE = ["\u2656", "\u2658", "\u2657", "\u2654", "\u2655", "\u2657", "\u2658", "\u2656"]
+  B_INITIAL_LINE = ["\u265C", "\u265E", "\u265D", "\u265B", "\u265A", "\u265D", "\u265E", "\u265C"]
 
   attr_accessor :board
 
   def initialize
     @board = Array.new(8) {
-      Array.new(8) {0}
+      Array.new(8) { NullPiece.instance }
     }
     make_starting_grid
-
   end
 
   def [](pos)
@@ -66,11 +68,11 @@ class Board
 
   protected
   def make_starting_grid
-    0.upto(7) {|i| @board[0][i] = Piece.new(INITIAL_LINE[i]) }
-    0.upto(7) {|i| @board[1][i] = Piece.new(:p) }
+    0.upto(7) {|i| @board[0][i] = Piece.new(W_INITIAL_LINE[i]) }
+    0.upto(7) {|i| @board[1][i] = Piece.new("\u2659") }
     2.upto(5) {|i| 0.upto(7) {|idx| @board[i][idx] = Piece.new } }
-    0.upto(7) {|i| @board[6][i] = Piece.new(:p) }
-    0.upto(7) {|i| @board[7][i] = Piece.new(INITIAL_LINE[i]) }
+    0.upto(7) {|i| @board[6][i] = Piece.new("\u265F") }
+    0.upto(7) {|i| @board[7][i] = Piece.new(B_INITIAL_LINE[i]) }
   end
 
   def find_king(color)

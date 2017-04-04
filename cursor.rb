@@ -79,7 +79,7 @@ class Cursor
   def handle_key(key)
     case key
     when :return, :space
-      @cursor_pos
+      toggele_selected(@cursor_pos)
     when :left, :right, :up, :down
       update_pos(MOVES[key])
     when :ctrl_c
@@ -94,5 +94,9 @@ class Cursor
       x << @cursor_pos[i] + diff[i]
     end
     @cursor_pos = x if @board.in_bounds?(x)
+  end
+
+  def toggele_selected(pos)
+    @board[pos].color = :green
   end
 end

@@ -17,12 +17,15 @@ class Display
       space = @board.board
       space.each_with_index do |row, idx|
         row.each_with_index do |el, i|
-          el_to_print = space[idx][i].to_s
+
+          el_to_print = space[idx][i]
+
           if @cursor.cursor_pos == [idx, i]
-            print "#{el_to_print} ".colorize(:red)
+            print "#{el_to_print.to_s} ".colorize(:red)
           else
-            print "#{el_to_print} "
+            print "#{el_to_print.to_s} ".colorize(el_to_print.color)
           end
+
         end
         print "\n"
       end
