@@ -7,6 +7,8 @@ class King < Piece
 
   MOVE = [[-1, 1], [-1, 0], [0, 1], [0, -1],
            [-1, -1], [1, 1], [1, -1], [1, 0]]
+  def mapping_pos
+  end
 end
 
 

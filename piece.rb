@@ -26,19 +26,24 @@ class Piece
   def valid_moves
   end
 
-  def moves
-  end
-
   private
   def move_into_check(to_pos)
   end
 end
 
 module Slidable
-  def moves
+  def moves(pos)
+    # moving_dirs = self.class::MOVE
+    # self.super.moves(moving_dirs)
+    # self.class::MOVE.map do |p_pos|
+    #   (0..1).each do |i|
+    #     p_pos[i] + pos[i]
+    #   end
+    # end
   end
 
   private
+
   def move_dirs
   end
 
@@ -55,8 +60,14 @@ end
 
 
 module Stepable
-  def moves
-    self.class::MOVE
+  def moves(pos)
+    # moving_dirs = self.class::MOVE
+    # self.super.moves(moving_dirs)
+    mvs = []
+    self.class::MOVE.map do |p_pos|
+      mvs << [p_pos[0] + pos[0], p_pos[1] + pos[1]]
+    end
+    mvs
   end
 
   private
