@@ -5,6 +5,7 @@ class NullPiece < Piece
   include Singleton
 
   def initialize
+    @name = '_'
   end
 
 end

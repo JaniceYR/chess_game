@@ -11,11 +11,7 @@ class Piece
   end
 
   def to_s
-    if name
-      @name
-    else
-      "_"
-    end
+    @name
   end
 
   def nil?

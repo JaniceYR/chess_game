@@ -28,6 +28,10 @@ class Board
     @board[row][col] = value
   end
 
+  def occupied?(pos)
+    !(self[pos].class == NullPiece)
+  end
+
   def move_piece(color, from_pos, to_pos)
     if valid_from?(from_pos) && valid_to?(to_pos) && self[from_pos].moves(from_pos).include?(to_pos)
       # we don't know yet
@@ -47,12 +51,12 @@ class Board
   end
 
   def valid_from?(pos)
-    valid_pos?(pos) && !self[pos].name.nil?
+    valid_pos?(pos) && occupied?(pos)
   end
 
   def valid_to?(pos)
         # we need to chang this part
-    valid_pos?(pos) && self[pos].name.nil?
+    valid_pos?(pos) && !occupied?(pos)
   end
 
   def valid_pos?(pos)
@@ -121,7 +125,7 @@ class Board
     @board[0][6] = Knight.new(:red, W_INITIAL_LINE[6] )
     @board[0][7] = Rook.new(:red, W_INITIAL_LINE[7] )
     0.upto(7) {|i| @board[1][i] = Paw.new(:red, "\u2659") }
-    2.upto(5) {|i| 0.upto(7) {|idx| @board[i][idx] = NullPiece.instance} }
+    # 2.upto(5) {|i| 0.upto(7) {|idx| @board[i][idx] = NullPiece.instance} }
     0.upto(7) {|i| @board[6][i] = Paw.new(:blue, "\u265F") }
     @board[7][0] = Rook.new(:blue, B_INITIAL_LINE[0] )
     @board[7][1] = Knight.new(:blue, B_INITIAL_LINE[1] )

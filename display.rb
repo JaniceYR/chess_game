@@ -19,7 +19,7 @@ class Display
       selected = @cursor.selected_pos
 
       if selected.length == 2
-        
+
         @board.move_piece(:red, selected[0], selected[1])
         @cursor.selection_clear
       end
